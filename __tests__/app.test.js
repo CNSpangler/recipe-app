@@ -127,14 +127,12 @@ describe('app routes', () => {
 
   // test DELETE single recipe
   it('deletes a recipe by id', async() => {
-    const recipes = await Recipe.create([
+    const recipe = await Recipe.create([
       { name: 'cookies', directions: [] },
-      { name: 'cake', directions: [] },
-      { name: 'pie', directions: [] }
     ]);
 
     return request(app)
-      .delete('/api/v1/recipe/:id')
+      .delete('/api/v1/recipe/${recipe._id}')
       .then(res => {
         recipe => {
           expect(res.body).toContainEqual({
