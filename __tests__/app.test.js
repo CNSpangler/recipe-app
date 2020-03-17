@@ -48,22 +48,30 @@ describe('app routes', () => {
   });
 
   // test GET a single recipe
-  it('gets a recipe by id', async() => {
-    const recipes = await Recipe.create([
-      { name: 'cookies', directions: [] },
-      { name: 'cake', directions: [] },
-      { name: 'pie', directions: [] }
-    ]);
-
+  it('gets a specific recipe', async() => {
+    const recipe = await Recipe.create(
+      { name: 'cookies',
+        directions: [
+          'preheat oven to 375',
+          'mix ingredients',
+          'put dough on cookie sheet',
+          'bake for 10 minutes'
+        ],
+      });
     return request(app)
-      .get('/api/v1/recipe/:id')
+      .get(`/api/v1/recipes/${recipe._id}`)
       .then(res => {
-        recipe => {
-          expect(res.body).toContainEqual({
-            _id: recipe._id.toString(),
-            name: recipe.name
-          });
-        };
+        expect(res.body).toEqual({
+          _id: expect.any(String),
+          name: recipe.name,
+          directions: [
+            'preheat oven to 375',
+            'mix ingredients',
+            'put dough on cookie sheet',
+            'bake for 10 minutes'
+          ],
+          __v: 0
+        });
       });
   });
 
