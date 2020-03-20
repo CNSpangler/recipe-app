@@ -116,7 +116,11 @@ describe('event routes', () => {
             _id: expect.any(String),
             name: 'cookies',
             ingredients: [
-              { _id: expect.any(String), name: 'flour', amount: 1, measurement: 'cup' }
+              { _id: expect.any(String),
+                name: 'flour', 
+                amount: 1, 
+                measurement: 'cup',
+                id: expect.any(String) }
             ],
             directions: [
               'preheat oven to 375',
@@ -124,12 +128,17 @@ describe('event routes', () => {
               'put dough on cookie sheet',
               'bake for 10 minutes'
             ],
+            id: expect.any(String),
             __v: 0
           },
           dateOfEvent: expect.any(String),
           notes: 'It went well',
           rating: 4,
-          __v: 0
+          __v: 0,
+          day: expect.any(Number),
+          month: expect.any(Number),
+          year: expect.any(Number),
+          id: expect.any(String)
         });
       });
   });
